@@ -51,6 +51,8 @@
 //! * **rocket_extras** Enhances [rocket](https://github.com/SergioBenitez/Rocket) framework integration with being
 //!   able to parse `path`, `path and query parameters` from rocket path attribute macros. See [rocket extras support][rocket_path]
 //!   or [examples](https://github.com/juhaku/utoipa/tree/master/examples) for more details
+//! * **axum_extras** Enhances [axum](https://github.com/tokio-rs/axum) framework integration allowing users to use `IntoParams`
+//!   without defining the `parameter_in` attribute. See [examples](https://github.com/juhaku/utoipa/tree/master/examples) for more details.
 //! * **debug** Add extra traits such as debug traits to openapi definitions and elsewhere.
 //! * **chrono** Add support for [chrono](https://crates.io/crates/chrono) `DateTime`, `Date` and `Duration` types. By default these types
 //!   are parsed to `string` types without
