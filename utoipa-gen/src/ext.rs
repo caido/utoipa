@@ -2,7 +2,7 @@
 use std::{borrow::Cow, cmp::Ordering};
 
 use proc_macro2::{Ident, TokenStream};
-use syn::{punctuated::Punctuated, token::Comma, Attribute, FnArg, ItemFn};
+use syn::{punctuated::Punctuated, token::Comma, Attribute, FnArg, ItemFn, TypePath};
 
 use crate::path::{parameter::Parameter, PathOperation};
 
@@ -30,7 +30,7 @@ pub struct ValueArgument<'a> {
 #[cfg_attr(feature = "debug", derive(Debug))]
 pub struct IntoParamsType<'a> {
     pub parameter_in_provider: TokenStream,
-    pub ident: &'a Ident,
+    pub type_path: &'a TypePath,
 }
 
 #[cfg_attr(feature = "debug", derive(Debug))]
@@ -226,19 +226,11 @@ pub mod fn_arg {
                 FnArg::Query(arg) => (arg, quote! { utoipa::openapi::path::ParameterIn::Query }),
             };
 
-            let type_name = arg
-                .path
-                .segments
-                .last()
-                .as_ref()
-                .map(|segment| &segment.ident)
-                .unwrap();
-
             IntoParamsType {
                 parameter_in_provider: quote! {
                     || Some(#parameter_in)
                 },
-                ident: type_name,
+                type_path: arg,
             }
         })
     }
